@@ -1,0 +1,10 @@
+zig-cache/
+zig-out/
+build/
+
+.ccls-cache/
+
+# Test files
+me.c
+me.h
+a.out
