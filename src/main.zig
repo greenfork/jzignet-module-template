@@ -2,9 +2,9 @@ const std = @import("std");
 const j = @import("jzignet");
 
 comptime {
-    const current_version = std.SemanticVersion.parse("0.9.0-dev.1678+7747bf07c") catch unreachable;
+    const current_version = std.SemanticVersion.parse("0.9.0") catch unreachable;
     const comparison = @import("builtin").zig_version.order(current_version);
-    if (comparison == .lt) @compileError("Zig version must be at least as of 2021-11-18");
+    if (comparison == .lt) @compileError("Zig version must be at least 0.9.0");
 }
 
 // Source Zig code
