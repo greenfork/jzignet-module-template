@@ -2,9 +2,9 @@ const std = @import("std");
 const j = @import("jzignet");
 
 comptime {
-    const current_version = std.SemanticVersion.parse("0.9.0") catch unreachable;
+    const current_version = std.SemanticVersion.parse("0.10.0") catch unreachable;
     const comparison = @import("builtin").zig_version.order(current_version);
-    if (comparison == .lt) @compileError("Zig version must be at least 0.9.0");
+    if (comparison == .lt) @compileError("Zig version must be at least 0.10.0");
 }
 
 // Source Zig code
@@ -75,11 +75,10 @@ fn cfunGetCounter(argc: i32, argv: [*]const j.Janet) callconv(.C) j.Janet {
 }
 
 // Declare all the functions which will be imported to Janet.
-const cfuns_zig = [_]j.Reg{
-    j.Reg{ .name = "init-struct", .cfun = cfunInitStruct },
-    j.Reg{ .name = "add", .cfun = cfunAdd },
-    j.Reg{ .name = "get-counter", .cfun = cfunGetCounter },
-    j.Reg.empty,
+const cfuns_zig = [_:j.Reg.empty]j.Reg{
+    j.Reg{ .name = "init-struct", .cfun = &cfunInitStruct },
+    j.Reg{ .name = "add", .cfun = &cfunAdd },
+    j.Reg{ .name = "get-counter", .cfun = &cfunGetCounter },
 };
 
 // C ABI code
